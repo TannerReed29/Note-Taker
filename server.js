@@ -1,13 +1,18 @@
+    // Dependencies 
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+
+    // const for saved notes json 
 const notesdb = require('./db/db.json');
 
-const PORT = process.env.PORT || 3001;
+    // tell node an express server is being created
 const app = express();
 
+    // set initial port with support for heroku
+const PORT = process.env.PORT || 3001;
 
-
+    // set up app for data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
@@ -15,7 +20,7 @@ app.use(express.static('public'));
 
 
 
-
+    // Routes 
 app.get('/api/notes', (req, res) => 
 {
     res.json(notesdb.slice(1));
@@ -40,7 +45,7 @@ app.get('*', (req, res) =>
 
 
 
-
+    // function to handle new notes being added to db, html, and assigning id
 function addNote (body, notesArr)
     {
     const newNote = body;
@@ -64,7 +69,7 @@ function addNote (body, notesArr)
     
 
 
-
+    // API and HTML POST 
 app.post('/api/notes', (req, res) => 
 {
     const newNote = addNote(req.body, notesdb);
@@ -73,7 +78,7 @@ app.post('/api/notes', (req, res) =>
 
 
 
-
+    // Listener "starts" the server
 app.listen(PORT, () => 
 {
     console.log(`API server now on port ${PORT}!`);
