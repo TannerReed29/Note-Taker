@@ -16,8 +16,8 @@
  ## Installation 
  npm install 
     for required packages 
- node index
-    to run application
+ node server.js
+    to run application server locally
 
 ## Questions 
  GitHub Username: TannerReed29 
